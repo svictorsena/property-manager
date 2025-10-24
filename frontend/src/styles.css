@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(200 85% 45%), hsl(200 85% 55%));
+  }
+
+  /* .gradient-secondary {
+    background: linear-gradient(135deg, hsl(200, 97%, 35%), hsl(200, 91%, 40%));
+  } */
+
+  /* .gradient-accent {
+    background: linear-gradient(135deg, hsl(20 90% 55%), hsl(30 90% 60%));
+  } */
+
+  .shadow-elegant {
+    box-shadow: 0 4px 16px -4px hsl(0 0% 0% / 0.4);
+  }
+
+  .outline-primary {
+    outline-color: hsl(200 85% 45%);
+    outline-offset: 4px;
+  }
+}

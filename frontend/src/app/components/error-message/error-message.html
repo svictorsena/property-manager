@@ -1,0 +1,5 @@
+<div class="absolute flex justify-start">
+    @if (control()?.touched && control()?.hasError("required")) {
+    <p class="text-red-500 text-sm">{{ message() }}</p>
+    }
+</div>
