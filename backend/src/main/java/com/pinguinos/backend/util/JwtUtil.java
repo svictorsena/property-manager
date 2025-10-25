@@ -1,4 +1,4 @@
-package com.pinguinos.backend.security;
+package com.pinguinos.backend.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

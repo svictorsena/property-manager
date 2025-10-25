@@ -1,8 +1,8 @@
-import { AuthService } from '@/services/auth/auth-service';
+import { AuthService } from '@/services/auth-service';
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from '@angular/router';
 
 export const ownerGuard: CanActivateFn = async (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const auth = inject(AuthService)
-  return await auth.isAuthenticated() && await auth.isOwner();
+  const authService = inject(AuthService)
+  return await authService.isAuthenticated() && await authService.isOwner();
 };

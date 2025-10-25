@@ -3,9 +3,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ErrorMessage } from '../error-message/error-message';
 import { Input } from '../input/input';
 import { FormButton } from '../form-button/form-button';
-import { AuthService } from '@/services/auth/auth-service';
-import { injectMutation } from '@tanstack/angular-query-experimental';
 import { Router } from '@angular/router';
+import { AuthService } from '@/services/auth-service';
 
 @Component({
     selector: 'app-login-form',
@@ -13,12 +12,12 @@ import { Router } from '@angular/router';
     templateUrl: './login-form.html',
 })
 export class LoginForm {
-    auth = inject(AuthService);
-    router = inject(Router);
+    private authService = inject(AuthService);
+    private router = inject(Router);
 
-    loginForm = new FormGroup({
-        username: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required),
+    loginForm: FormGroup = new FormGroup({
+        username: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)]}),
+        password: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(6)]}),
     });
 
     get username() {
@@ -34,7 +33,7 @@ export class LoginForm {
             this.loginForm.markAllAsTouched();
             return;
         }
-        this.auth.login(this.loginForm.value).subscribe({
+        this.authService.login(this.loginForm.value).subscribe({
             next: async (user: any) => {
                 console.log(user);
                 this.router.navigate([

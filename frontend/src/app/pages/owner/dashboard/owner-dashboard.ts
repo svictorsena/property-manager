@@ -1,6 +1,5 @@
-import { AuthService } from '@/services/auth/auth-service';
-import { Component, effect, inject, signal } from '@angular/core';
-import { Observable, firstValueFrom } from 'rxjs';
+import { AuthService } from '@/services/auth-service';
+import { Component, inject } from '@angular/core';
 
 @Component({
     selector: 'app-owner-dashboard',

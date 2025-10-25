@@ -3,9 +3,7 @@ import { Input } from '../input/input';
 import { ErrorMessage } from '../error-message/error-message';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormButton } from '../form-button/form-button';
-import { injectMutation } from '@tanstack/angular-query-experimental';
-import { TenantService } from '@/services/tenant/tenant-service';
-import { AuthService } from '@/services/auth/auth-service';
+import { OwnerService } from '@/services/owner-service';
 
 @Component({
     selector: 'app-register-form',
@@ -13,8 +11,8 @@ import { AuthService } from '@/services/auth/auth-service';
     templateUrl: './register-form.html',
 })
 export class RegisterForm {
-    authService = inject(AuthService)
-    
+    ownerService = inject(OwnerService);
+
     registerForm = new FormGroup({
         fullName: new FormControl('', Validators.required),
         username: new FormControl('', Validators.required),
@@ -40,13 +38,13 @@ export class RegisterForm {
     //     return <FormControl>this.registerForm.get('confirmPassword')!;
     // }
 
-
     onSubmit() {
         if (this.registerForm.invalid) {
             this.registerForm.markAllAsTouched();
             return;
         }
-        this.authService.register(this.registerForm.value).subscribe({next: (data) => console.log(data)})
-     
+        this.ownerService
+            .register(this.registerForm.value)
+            .subscribe({ next: (data: any) => console.log(data) });
     }
 }

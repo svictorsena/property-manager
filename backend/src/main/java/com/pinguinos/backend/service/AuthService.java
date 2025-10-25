@@ -2,26 +2,23 @@ package com.pinguinos.backend.service;
 
 import com.pinguinos.backend.dto.LoginRequest;
 import com.pinguinos.backend.dto.LoginResponse;
-import com.pinguinos.backend.model.Tenant;
 import com.pinguinos.backend.model.User;
 import com.pinguinos.backend.repository.UserRepository;
-import com.pinguinos.backend.security.CookieUtil;
-import com.pinguinos.backend.security.JwtUtil;
+import com.pinguinos.backend.util.CookieUtil;
+import com.pinguinos.backend.util.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthService {
 
-    private CookieUtil cookieUtil;
-    private JwtUtil jwtUtil;
-    private TenantService tenantService;
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final CookieUtil cookieUtil;
+    private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public LoginResponse login(LoginRequest request, HttpServletResponse response) throws Exception {
         try {

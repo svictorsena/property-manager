@@ -9,7 +9,6 @@ import lombok.Setter;
 @Entity
 
 @DiscriminatorValue("TENANT")
-//@Table(name = "tenants")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 public class Tenant extends User {
