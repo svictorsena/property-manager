@@ -1,10 +1,7 @@
 package com.pinguinos.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +12,7 @@ import java.util.List;
 
 @Entity
 //@Table(name = "owners")
+@DiscriminatorValue("OWNER")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 public class Owner extends User {

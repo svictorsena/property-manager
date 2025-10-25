@@ -31,21 +31,21 @@ public class JwtUtil {
     public String generateToken(User user) {
 
         return Jwts.builder()
-                .setSubject(user.getUsername())
+                .subject(user.getUsername())
                 .claim("uid", user.getId().toString())
                 .claim("role", user.getRole().name())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(jwtSecretKey)
                 .compact();
     }
 
     public Claims parseAndGetClaims(String token) throws JwtException {
-        return Jwts.parserBuilder()
-                .setSigningKey(jwtSecretKey)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
+        return Jwts.parser().
+                verifyWith(jwtSecretKey).
+                build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
     public boolean validateToken(String token) {

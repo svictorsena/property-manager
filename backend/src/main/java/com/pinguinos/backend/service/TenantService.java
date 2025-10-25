@@ -4,8 +4,11 @@ import com.pinguinos.backend.dto.CreateTenantRequest;
 import com.pinguinos.backend.enums.Role;
 import com.pinguinos.backend.model.Owner;
 import com.pinguinos.backend.model.Tenant;
+import com.pinguinos.backend.repository.OwnerRepository;
 import com.pinguinos.backend.repository.TenantRepository;
 import com.pinguinos.backend.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,20 +18,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class TenantService {
 
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
+    private OwnerRepository ownerRepository;
     private TenantRepository tenantRepository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public Tenant createTenant(CreateTenantRequest request, String ownerUsername) {
-        Owner owner = (Owner) userRepository
-                .findByUsername(ownerUsername)
+        Owner owner = (Owner) userRepository.findByUsername(ownerUsername)
                 .orElseThrow(() -> new RuntimeException("Owner não encontrado"));
 
         Tenant tenant = new Tenant();
@@ -36,7 +35,7 @@ public class TenantService {
         tenant.setUsername(request.username());
         tenant.setPassword(passwordEncoder.encode(request.password()));
         tenant.setTel(request.tel());
-        tenant.setRole(Role.TENANT);
+        tenant.setRole(Role.ROLE_TENANT);
         tenant.setOwner(owner);
 
         return userRepository.save(tenant);

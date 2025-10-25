@@ -1,6 +1,6 @@
 package com.pinguinos.backend.enums;
 
 public enum Role {
-    OWNER,
-    TENANT
+    ROLE_OWNER,
+    ROLE_TENANT
 }

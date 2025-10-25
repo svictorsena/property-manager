@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class LoginForm {
     auth = inject(AuthService);
-    router = inject(Router)
+    router = inject(Router);
 
     loginForm = new FormGroup({
         username: new FormControl('', Validators.required),
@@ -29,20 +29,18 @@ export class LoginForm {
         return <FormControl>this.loginForm.get('password')!;
     }
 
-    loginMutation = injectMutation(() => ({
-        mutationFn: (data: any) => this.auth.login(data),
-        onSuccess: () => {
-            console.log('Login OK');
-            this.router.navigate(['/owner/dashboard']);
-        },
-        onError: (err) => console.error(err),
-    }));
-
-    onSubmit() {
+    async onSubmit() {
         if (this.loginForm.invalid) {
             this.loginForm.markAllAsTouched();
             return;
         }
-        this.loginMutation.mutate(this.loginForm.value);
+        this.auth.login(this.loginForm.value).subscribe({
+            next: async (user: any) => {
+                console.log(user);
+                this.router.navigate([
+                    user.role === 'ROLE_OWNER' ? '/owner/dashboard' : '/tenant/dashboard',
+                ]);
+            },
+        });
     }
 }

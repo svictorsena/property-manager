@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+
+@DiscriminatorValue("TENANT")
 //@Table(name = "tenants")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
