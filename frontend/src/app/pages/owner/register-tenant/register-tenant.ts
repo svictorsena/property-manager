@@ -1,4 +1,4 @@
-import { RegisterForm } from '@/components/register-form/register-form';
+import { RegisterForm } from '@/components/form/register-form/register-form';
 import { TenantService } from '@/services/tenant-service';
 import { Component, inject } from '@angular/core';
 import { injectMutation } from '@tanstack/angular-query-experimental';

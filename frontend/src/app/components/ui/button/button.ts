@@ -1,10 +1,10 @@
 import { Component, input } from '@angular/core';
 
 @Component({
-    selector: 'app-form-button',
+    selector: 'app-button',
     imports: [],
-    templateUrl: './form-button.html',
+    templateUrl: './button.html',
 })
-export class FormButton {
+export class Button {
     text = input<string>();
 }

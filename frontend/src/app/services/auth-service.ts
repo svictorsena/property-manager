@@ -1,14 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { Role } from '@/types/role';
 import { ApiService } from './api-service';
-
-interface IUser {
-    fullName: string;
-    username: string;
-    tel: string;
-    role: Role;
-}
+import { IUser } from '@/interfaces/IUser';
 
 @Injectable({
     providedIn: 'root',

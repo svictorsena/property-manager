@@ -1,14 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ErrorMessage } from '../error-message/error-message';
-import { Input } from '../input/input';
-import { FormButton } from '../form-button/form-button';
+import { ErrorMessage } from '../../ui/error-message/error-message';
+import { Input } from '../../ui/input/input';
+import { Button } from '../../ui/button/button';
 import { Router } from '@angular/router';
 import { AuthService } from '@/services/auth-service';
 
 @Component({
     selector: 'app-login-form',
-    imports: [ReactiveFormsModule, ErrorMessage, Input, FormButton],
+    imports: [ReactiveFormsModule, ErrorMessage, Input, Button],
     templateUrl: './login-form.html',
 })
 export class LoginForm {
@@ -16,8 +16,12 @@ export class LoginForm {
     private router = inject(Router);
 
     loginForm: FormGroup = new FormGroup({
-        username: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(3)]}),
-        password: new FormControl<string>('', { validators: [Validators.required, Validators.minLength(6)]}),
+        username: new FormControl<string>('', {
+            validators: [Validators.required, Validators.minLength(3)],
+        }),
+        password: new FormControl<string>('', {
+            validators: [Validators.required, Validators.minLength(6)],
+        }),
     });
 
     get username() {

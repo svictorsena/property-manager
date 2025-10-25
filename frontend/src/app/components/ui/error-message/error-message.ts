@@ -26,6 +26,8 @@ export class ErrorMessage {
         }
         if (errors['pattern']) return 'Formato inválido';
 
+        if (errors['mustBeNumber']) return 'Campo aceita somente número'
+
         return null;
     }
 }

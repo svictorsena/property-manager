@@ -4,14 +4,13 @@
             <app-input label="Nome de usuário" [control]="username" type="text" />
             <app-error-message [control]="username" message="Nome de usuário é obrigatório" />
         </div>
-
         <div class="relative">
             <app-input label="Senha" [control]="password" type="password" />
             <app-error-message [control]="password" message="Senha é obrigatória" />
         </div>
     </div>
 
-    <app-form-button text="Entrar" />
+    <app-button text="Entrar" />
 
     <div></div>
 </form>

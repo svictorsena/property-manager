@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginForm } from "@/components/login-form/login-form"
+import { LoginForm } from '@/components/form/login-form/login-form';
 import { LucideAngularModule, Building2 } from 'lucide-angular';
 
 @Component({

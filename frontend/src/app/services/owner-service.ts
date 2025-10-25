@@ -8,6 +8,6 @@ export class OwnerService {
     private readonly api = inject(ApiService);
 
     register(data: any) {
-        return this.api.post('tenants', data);
+        return this.api.post('owner/register-tenant', data);
     }
 }

@@ -1,0 +1,9 @@
+<div class="flex flex-col items-start gap-2 mt-3">
+    <label class="font-semibold text-sm">{{ label() }}</label>
+    <input
+        class="w-full bg-gray-100 border-[0.5px] border-gray-300 py-1.5 px-3 rounded-lg"
+        [type]="type()"
+        [formControl]="control()!"
+        [class]="control()!.invalid && control()!.touched ? 'outline-error' : 'outline-primary'"
+    />
+</div>

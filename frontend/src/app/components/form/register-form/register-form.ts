@@ -1,23 +1,30 @@
 import { Component, inject } from '@angular/core';
-import { Input } from '../input/input';
-import { ErrorMessage } from '../error-message/error-message';
+import { Input } from '../../ui/input/input';
+import { ErrorMessage } from '../../ui/error-message/error-message';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FormButton } from '../form-button/form-button';
+import { Button } from '../../ui/button/button';
 import { OwnerService } from '@/services/owner-service';
+import { mustBeNumberValidator } from '@/util/mustBeNumberValidator';
 
 @Component({
     selector: 'app-register-form',
-    imports: [Input, ErrorMessage, ReactiveFormsModule, FormButton],
+    imports: [Input, ErrorMessage, ReactiveFormsModule, Button],
     templateUrl: './register-form.html',
 })
 export class RegisterForm {
     ownerService = inject(OwnerService);
 
     registerForm = new FormGroup({
-        fullName: new FormControl('', Validators.required),
-        username: new FormControl('', Validators.required),
-        tel: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required),
+        fullName: new FormControl('', {
+            validators: [Validators.required, Validators.minLength(8)],
+        }),
+        username: new FormControl('', {
+            validators: [Validators.required, Validators.minLength(3)],
+        }),
+        tel: new FormControl('', { validators: [Validators.required, mustBeNumberValidator()] }),
+        password: new FormControl('', {
+            validators: [Validators.required, Validators.minLength(6)],
+        }),
         // confirmPassword: new FormControl('', Validators.required),
     });
 

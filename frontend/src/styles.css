@@ -21,4 +21,9 @@
     outline-color: hsl(200 85% 45%);
     outline-offset: 4px;
   }
+
+  .outline-error {
+    outline-color: #fb2c36;
+    outline-offset: 4px;
+  }
 }

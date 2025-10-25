@@ -1,9 +1,9 @@
 import { Component, input } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, ɵInternalFormsSharedModule } from '@angular/forms';
 
 @Component({
     selector: 'app-input',
-    imports: [],
+    imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
     templateUrl: './input.html',
 })
 export class Input {
