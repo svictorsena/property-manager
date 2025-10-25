@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { Auth } from './pages/auth/auth';
 import { Home } from './pages/home/home';
-import { Dashboard } from './pages/tenant/dashboard/dashboard';
+
 import { RegisterTenant } from './pages/owner/register-tenant/register-tenant';
 import { NotFound } from './pages/not-found/not-found';
+import { TenantDashboard } from './pages/tenant/dashboard/tenant-dashboard';
+import { OwnerDashboard } from './pages/owner/dashboard/owner-dashboard';
 
 export const routes: Routes = [
     {
@@ -16,7 +18,11 @@ export const routes: Routes = [
     },
     {
         path: 'tenant/dashboard',
-        component: Dashboard,
+        component: TenantDashboard,
+    },
+    {
+        path: 'owner/dashboard',
+        component: OwnerDashboard,
     },
     {
         path: 'owner/register-tenant',

@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Input } from '../input/input';
 import { ErrorMessage } from '../error-message/error-message';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FormButton } from "../form-button/form-button";
+import { FormButton } from '../form-button/form-button';
+import { injectMutation } from '@tanstack/angular-query-experimental';
+import { TenantService } from '@/services/tenant/tenant-service';
 
 @Component({
     selector: 'app-register-form',
@@ -10,12 +12,14 @@ import { FormButton } from "../form-button/form-button";
     templateUrl: './register-form.html',
 })
 export class RegisterForm {
+    tenant = inject(TenantService)
+    
     registerForm = new FormGroup({
         completeName: new FormControl('', Validators.required),
         username: new FormControl('', Validators.required),
         tel: new FormControl('', Validators.required),
         password: new FormControl('', Validators.required),
-        confirmPassword: new FormControl('', Validators.required),
+        // confirmPassword: new FormControl('', Validators.required),
     });
 
     get completeName() {
@@ -31,14 +35,20 @@ export class RegisterForm {
     get password() {
         return <FormControl>this.registerForm.get('password')!;
     }
-    get confirmPassword() {
-        return <FormControl>this.registerForm.get('confirmPassword')!;
-    }
+    // get confirmPassword() {
+    //     return <FormControl>this.registerForm.get('confirmPassword')!;
+    // }
+
+    registerMutation = injectMutation(() => ({
+        mutationFn: (data: any) => this.tenant.register(data),
+        onSuccess: () => console.log('rapaz foi'),
+    }));
+
     onSubmit() {
         if (this.registerForm.invalid) {
             this.registerForm.markAllAsTouched();
             return;
         }
-        console.log(this.registerForm.value);
+        this.registerMutation.mutate(this.registerForm.value);
     }
 }

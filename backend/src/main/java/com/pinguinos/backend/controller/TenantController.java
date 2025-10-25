@@ -27,7 +27,7 @@ public class TenantController {
         return tenantService.getAllTenantsByOwnerUsername(ownerUsername);
     }
 
-    @PreAuthorize("hasHole('OWNER'")
+//    @PreAuthorize("hasHole('OWNER'")
     @PostMapping
     public Tenant addTenant(@RequestBody CreateTenantRequest request, Authentication authentication) {
         String ownerUsername = authentication.getName();

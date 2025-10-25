@@ -1,27 +1,26 @@
 import { inject, Injectable } from '@angular/core';
 import { ApiService } from '../api/api-service';
 
-interface User {
-  id: number | string
-  username: string
-  role: string
-}
-
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class AuthService {
-  private readonly api = inject(ApiService)
+    private readonly api = inject(ApiService);
 
-  getUser() {
-    return this.api.get<User>("me", ["me"])
-  }
+    getUser() {
+        return this.api.get<any>('auth/me');
+      
+    }
 
-  isAdmin(): boolean {
-    return this.getUser().data()?.role === 'ADMIN';
-  }
+    // isOwner(): boolean {
+    //     return this.getUser().data()?.role === 'OWNER';
+    // }
 
-  isAuthenticated(): boolean {
-    return !!this.getUser();
-  }
+    // isAuthenticated(): boolean {
+    //     return !!this.getUser();
+    // }
+
+    login(data: any) {
+        return this.api.post("auth/login", data)
+    }
 }
