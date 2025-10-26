@@ -1,9 +1,7 @@
-package com.pinguinos.backend.dto;
+package com.pinguinos.backend.dto.response;
 
 import com.pinguinos.backend.enums.Role;
-import lombok.Builder;
 
-@Builder
 public record MeResponse(
           String fullName,
           String username,

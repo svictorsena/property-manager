@@ -14,8 +14,13 @@ export class AuthService {
     }
 
     async isOwner(): Promise<boolean> {
-        const user = await this.getUser();
-        return user.role === 'ROLE_OWNER';
+        try {
+            const user = await this.getUser();
+            return user.role === 'ROLE_OWNER';
+
+        } catch {
+            return false
+        }
     }
     async isAuthenticated(): Promise<boolean> {
         try {

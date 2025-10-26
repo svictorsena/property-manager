@@ -1,4 +1,4 @@
-package com.pinguinos.backend.dto;
+package com.pinguinos.backend.dto.response;
 
 import com.pinguinos.backend.enums.Role;
 

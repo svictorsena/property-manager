@@ -1,7 +1,7 @@
 package com.pinguinos.backend.service;
 
-import com.pinguinos.backend.dto.LoginRequest;
-import com.pinguinos.backend.dto.LoginResponse;
+import com.pinguinos.backend.dto.request.LoginRequest;
+import com.pinguinos.backend.dto.response.LoginResponse;
 import com.pinguinos.backend.model.User;
 import com.pinguinos.backend.repository.UserRepository;
 import com.pinguinos.backend.util.CookieUtil;

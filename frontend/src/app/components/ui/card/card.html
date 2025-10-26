@@ -1,0 +1,10 @@
+<div class="p-6 flex flex-col gap-2 shadow-sm shadow-blue-200 hover:shadow-md transition-shadow bg-card rounded-2xl">
+    <div class="flex flex-row justify-between items-center">
+        <p class="font-semibold text-sm">{{ title() }}</p>
+        <lucide-angular [img]="icon()" size="18" [class]="color()" />
+    </div>
+    <div class="flex flex-col justify-start">
+        <p class="text-2xl font-bold">{{ text() }}</p>
+        <span class="text-sm text-gray-500/80">{{ subtext() }}</span>
+    </div>
+</div>
