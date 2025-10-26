@@ -13,6 +13,10 @@
     background: linear-gradient(135deg, hsl(20 90% 55%), hsl(30 90% 60%));
   } */
 
+  .transition-smooth {
+    transition: all .3s ease-out;
+  }
+
   .shadow-elegant {
     box-shadow: 0 4px 16px -4px hsl(0 0% 0% / 0.4);
   }

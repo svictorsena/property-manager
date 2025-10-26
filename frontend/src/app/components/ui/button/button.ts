@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-button',
@@ -6,5 +6,4 @@ import { Component, input } from '@angular/core';
     templateUrl: './button.html',
 })
 export class Button {
-    text = input<string>();
 }

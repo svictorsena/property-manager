@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { LoginForm } from '@/components/form/login-form/login-form';
-import { LucideAngularModule, Building2 } from 'lucide-angular';
+import { AuthCard } from "@/components/auth-card/auth-card";
 
 @Component({
     selector: 'app-auth',
-    imports: [LoginForm, LucideAngularModule],
+    imports: [LoginForm, AuthCard],
     templateUrl: './auth.html',
 })
 export class Auth {
-    readonly Building2 = Building2;
 }
