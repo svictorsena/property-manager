@@ -1,23 +1,7 @@
 <div class="flex flex-row min-h-screen overflow-hidden">
     <app-side-bar />
     <div class="flex w-full flex-col">
-        <div
-            class="sticky top-0 flex flex-row justify-between w-full py-2.5 px-5 bg-white items-center shadow-md shadow-blue-100"
-        >
-            <div
-                class="w-1/4 flex-row flex h-full items-center gap-3 p-3 bg-gray-50 text-gray-500 border-[0.5px] border-gray-300 py-1.5 px-3 rounded-lg text-sm"
-            >
-                <lucide-angular size="16" [img]="Search" />
-                <input
-                    class="w-full outline-none"
-                    type="text"
-                    placeholder="Buscar unidades, contratos..."
-                />
-            </div>
-            <div class="p-3 hover-primary transition-colors duration-400 rounded-lg cursor-pointer">
-                <lucide-angular size="16" [img]="User" />
-            </div>
-        </div>
+        <app-header />
         <div class="p-5.5 flex flex-col gap-7">
             <div class="flex flex-col">
                 <h1 class="text-3xl font-bold">Dashboard Administrativo</h1>
