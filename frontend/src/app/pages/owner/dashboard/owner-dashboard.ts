@@ -3,10 +3,11 @@ import { LucideAngularModule, Building2, FileText, CreditCard, TrendingUp } from
 import { Card } from '@/components/ui/card/card';
 import { SideBar } from '@/components/ui/side-bar/side-bar';
 import { Header } from '@/components/ui/header/header';
+import { MainTitle } from "@/components/ui/main-title/main-title";
 
 @Component({
     selector: 'app-owner-dashboard',
-    imports: [LucideAngularModule, Card, SideBar, Header],
+    imports: [LucideAngularModule, Card, SideBar, Header, MainTitle],
     templateUrl: './owner-dashboard.html',
 })
 export class OwnerDashboard {

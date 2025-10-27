@@ -1,56 +1,51 @@
 <div
-        class="h-screen shrink-0 gradient-primary flex p-2 transition-all duration-400 flex-col text-white"
-        [class.w-xs]="isOpened()"
-        [class.w-12]="!isOpened()"
+    class="h-screen shrink-0 gradient-primary flex p-2 transition-all duration-400 flex-col text-white"
+    [class.w-xs]="isOpened()"
+    [class.w-12]="!isOpened()"
+>
+    <div
+        class="flex items-center w-full p-2 pt-2"
+        [class]="isOpened() ? 'justify-between' : 'justify-center'"
     >
-        <div
-            class="flex items-center w-full p-2 pt-2"
-            [class]="isOpened() ? 'justify-between' : 'justify-center'"
+        <h3
+            class="font-bold text-lg text-nowrap transition-all duration-400 overflow-hidden"
+            [class.opacity-0]="!isOpened()"
+            [class.w-0]="!isOpened()"
         >
-            <h3
-                class="font-bold text-lg text-nowrap transition-all duration-400 overflow-hidden"
-                [class.opacity-0]="!isOpened()"
-                [class.w-0]="!isOpened()"
-            >
-                Property Manager
-            </h3>
-            <button
-                (click)="toggleIsOpened()"
-                class="cursor-pointer hover:bg-blue-300/50 transition-colors duration-400 rounded-xl px-1.5 py-1.5"
-            >
-                <lucide-angular size="20" [img]="PanelLeft" />
-            </button>
+            Property Manager
+        </h3>
+        <button
+            (click)="toggleIsOpened()"
+            class="cursor-pointer hover:bg-blue-300/50 transition-colors duration-400 rounded-xl px-1.5 py-1.5"
+        >
+            <lucide-angular size="20" [img]="PanelLeft" />
+        </button>
+    </div>
+
+    <div class="mt-10 gap-1 flex flex-col">
+        <div
+            class="px-2 transition-opacity duration-400 overflow-hidden"
+            [class.opacity-0]="!isOpened()"
+        >
+            <span class="text-sm text-gray-300/80 font-semibold">Gestão</span>
         </div>
 
-        <div class="mt-10 gap-1 flex flex-col">
+        <div class="flex flex-col gap-2 text-sm">
+            @for (item of ownerItems; track item.id) {
             <div
-                class="px-2 transition-opacity duration-400 overflow-hidden"
-                [class.opacity-0]="!isOpened()"
+                class="flex flex-row gap-2 w-full items-center hover:bg-blue-300/50 transition-all duration-400 cursor-pointer rounded-xl px-1.5 py-1.5"
+                [routerLink]="item.url"
+                [class.-translate-y-10]="!isOpened()"
             >
-                <span class="text-sm text-gray-300/80 font-semibold">Gestão</span>
-            </div>
-
-            <div class="flex flex-col gap-2 text-sm">
-                @for (item of ownerItems; track item.id) {
-                <div
-                    class="flex flex-row gap-2 w-full items-center hover:bg-blue-300/50 transition-colors duration-400 cursor-pointer rounded-xl px-1.5 py-1.5"
-                    [routerLink]="item.url"
+                <lucide-angular size="20" [img]="item.icon" />
+                <h3
+                    class="transition-opacity duration-400 overflow-hidden"
+                    [class.opacity-0]="!isOpened()"
                 >
-                    <lucide-angular
-                        size="20"
-                        [img]="item.icon"
-                        class="transition-transform duration-400"
-                        [style.transform]="isOpened() ? 'translateY(0)' : 'translateY(-25px)'"
-                    />
-                    <h3
-                        class="transition-all duration-400 overflow-hidden"
-                        [class.opacity-0]="!isOpened()"
-                        [style.transform]="isOpened() ? 'translateY(0)' : 'translateY(-25px)'"
-                    >
-                        {{ item.title }}
-                    </h3>
-                </div>
-                }
+                    {{ item.title }}
+                </h3>
             </div>
+            }
         </div>
     </div>
+</div>
