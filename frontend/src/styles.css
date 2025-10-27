@@ -42,4 +42,8 @@
             }
         }
     }
+
+    .bg-primary {
+        background-color: hsl(200 85% 50%);
+    }
 }

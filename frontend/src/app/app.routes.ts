@@ -61,7 +61,7 @@ export const routes: Routes = [
         component: Tenants,
     },
     {
-        path: 'owner/register-tenants',
+        path: 'owner/register-tenant',
         canActivate: [ownerGuard],
         component: RegisterTenant,
     },
