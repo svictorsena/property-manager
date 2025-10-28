@@ -22,7 +22,7 @@ export class ApiService {
         });
     }
 
-    post<T>(url: string, body: any, options: ApiOptions = {}): Observable<T> {
+    post<T>(url: string, body?: any, options: ApiOptions = {}): Observable<T> {
         return this.http.post<T>(`${this.baseUrl}/${url}`, body, {
             ...this.defaultHttpOptions,
             ...options,

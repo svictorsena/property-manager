@@ -17,14 +17,14 @@ import java.util.List;
 public class OwnerController {
     private final TenantService tenantService;
 
-    @PreAuthorize("hasHole('OWNER'")
+    @PreAuthorize("hasRole('OWNER'")
     @GetMapping("/tenants")
     public List<Tenant> getAllTenants(Authentication authentication) {
         String ownerUsername = authentication.getName();
         return tenantService.getAllTenantsByOwnerUsername(ownerUsername);
     }
 
-    @PreAuthorize("hasHole('OWNER'")
+    @PreAuthorize("hasRole('OWNER'")
     @PostMapping("/register-tenant")
     public Tenant addTenant(@Valid @RequestBody CreateTenantRequest request, Authentication authentication) {
         String ownerUsername = authentication.getName();

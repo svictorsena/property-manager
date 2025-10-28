@@ -1,7 +1,10 @@
 package com.pinguinos.backend.service;
 
+import com.pinguinos.backend.dto.request.CreateTenantRequest;
 import com.pinguinos.backend.dto.request.LoginRequest;
 import com.pinguinos.backend.dto.response.LoginResponse;
+import com.pinguinos.backend.model.Owner;
+import com.pinguinos.backend.model.Tenant;
 import com.pinguinos.backend.model.User;
 import com.pinguinos.backend.repository.UserRepository;
 import com.pinguinos.backend.util.CookieUtil;
@@ -11,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -19,6 +24,8 @@ public class AuthService {
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final InviteTokenService inviteTokenService;
+    private final TenantService tenantService;
 
     public LoginResponse login(LoginRequest request, HttpServletResponse response) throws Exception {
         try {
@@ -38,5 +45,13 @@ public class AuthService {
         } catch (Exception e) {
             throw new RuntimeException("Usuário ou senha inválidos");
         }
+    }
+
+    public Tenant register(CreateTenantRequest request, String token) {
+        Owner owner = (Owner) userRepository
+                .findById(inviteTokenService.getOwnerId(token))
+                .orElseThrow(() -> new RuntimeException("Owner não encontrado"));
+
+        return tenantService.createTenant(request, owner.getUsername());
     }
 }

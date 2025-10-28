@@ -17,9 +17,8 @@ export class AuthService {
         try {
             const user = await this.getUser();
             return user.role === 'ROLE_OWNER';
-
         } catch {
-            return false
+            return false;
         }
     }
     async isAuthenticated(): Promise<boolean> {
@@ -33,5 +32,13 @@ export class AuthService {
 
     login(data: any) {
         return this.api.post('auth/login', data);
+    }
+
+    register(data: any, token: any) {
+        return this.api.post('auth/register', {...data, token})
+    }
+
+    async validateToken(token: string): Promise<boolean> {
+        return await firstValueFrom(this.api.post('invite-token/validate', token));
     }
 }

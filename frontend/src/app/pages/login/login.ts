@@ -5,7 +5,7 @@ import { AuthCard } from "@/components/ui/auth-card/auth-card";
 @Component({
     selector: 'app-auth',
     imports: [LoginForm, AuthCard],
-    templateUrl: './auth.html',
+    templateUrl: './login.html',
 })
-export class Auth {
+export class Login {
 }

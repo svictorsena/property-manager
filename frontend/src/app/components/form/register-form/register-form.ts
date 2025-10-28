@@ -1,3 +1,4 @@
+import { AuthService } from '@/services/auth-service';
 import { Component, inject } from '@angular/core';
 import { Input } from '../../ui/input/input';
 import { ErrorMessage } from '../../ui/error-message/error-message';
@@ -5,14 +6,20 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Button } from '../../ui/button/button';
 import { OwnerService } from '@/services/owner-service';
 import { mustBeNumberValidator } from '@/util/mustBeNumberValidator';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-register-form',
     imports: [Input, ErrorMessage, ReactiveFormsModule, Button],
     templateUrl: './register-form.html',
+    host: {
+        class: 'w-full',
+    },
 })
 export class RegisterForm {
+    authService = inject(AuthService);
     ownerService = inject(OwnerService);
+    activedRoute = inject(ActivatedRoute);
 
     registerForm = new FormGroup({
         fullName: new FormControl('', {
@@ -50,8 +57,13 @@ export class RegisterForm {
             this.registerForm.markAllAsTouched();
             return;
         }
-        this.ownerService
-            .register(this.registerForm.value)
-            .subscribe({ next: (data: any) => console.log(data) });
+        if (this.activedRoute.routeConfig?.path?.includes('owner')) {
+            this.ownerService.register(this.registerForm.value).subscribe(res => console.log(res));
+            return;
+        }
+        this.authService.register(
+            this.registerForm.value,
+            this.activedRoute.snapshot.queryParams['token']
+        ).subscribe(res => console.log(res));
     }
 }

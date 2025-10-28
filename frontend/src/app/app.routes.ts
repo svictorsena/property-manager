@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { Auth } from './pages/auth/auth';
+import { Login } from './pages/login/login';
 import { Home } from './pages/home/home';
-import { RegisterTenant } from './pages/owner/register-tenant/register-tenant';
+import { Register } from './pages/register/register';
 import { NotFound } from './pages/not-found/not-found';
 import { TenantDashboard } from './pages/tenant/dashboard/tenant-dashboard';
 import { OwnerDashboard } from './pages/owner/dashboard/owner-dashboard';
@@ -15,6 +15,7 @@ import { Maintenance } from './pages/owner/maintenance/maintenance';
 import { Tenants } from './pages/owner/tenants/tenants';
 import { Reports } from './pages/owner/reports/reports';
 import { Settings } from './pages/owner/settings/settings';
+import { tokenGuard } from './guards/token-guard';
 
 export const routes: Routes = [
     {
@@ -22,8 +23,8 @@ export const routes: Routes = [
         component: Home,
     },
     {
-        path: 'auth',
-        component: Auth,
+        path: 'login',
+        component: Login,
     },
     {
         path: 'tenant/dashboard',
@@ -61,9 +62,9 @@ export const routes: Routes = [
         component: Tenants,
     },
     {
-        path: 'owner/register-tenant',
-        canActivate: [ownerGuard],
-        component: RegisterTenant,
+        path: 'register',
+        canActivate: [tokenGuard],
+        component: Register,
     },
     {
         path: 'owner/reports',
