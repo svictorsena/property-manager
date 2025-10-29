@@ -58,12 +58,14 @@ export class RegisterForm {
             return;
         }
         if (this.activedRoute.routeConfig?.path?.includes('owner')) {
-            this.ownerService.register(this.registerForm.value).subscribe(res => console.log(res));
+            this.ownerService
+                .register(this.registerForm.value)
+                .subscribe((res) => console.log(res));
             return;
         }
         this.authService.register(
             this.registerForm.value,
             this.activedRoute.snapshot.queryParams['token']
-        ).subscribe(res => console.log(res));
+        );
     }
 }

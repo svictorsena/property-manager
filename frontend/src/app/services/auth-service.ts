@@ -1,16 +1,16 @@
 import { inject, Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
-import { ApiService } from './api-service';
+import { firstValueFrom, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { IUser } from '@/interfaces/IUser';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    private api = inject(ApiService);
+    private http = inject(HttpClient);
 
     async getUser(): Promise<IUser> {
-        return await firstValueFrom(this.api.get<IUser>(`auth/me`));
+        return await firstValueFrom(this.http.get<IUser>(`auth/me`));
     }
 
     async isOwner(): Promise<boolean> {
@@ -31,14 +31,14 @@ export class AuthService {
     }
 
     login(data: any) {
-        return this.api.post('auth/login', data);
+        return this.http.post('auth/login', data);
     }
 
     register(data: any, token: any) {
-        return this.api.post('auth/register', {...data, token})
+        return this.http.post('auth/register', {...data, token})
     }
 
-    async validateToken(token: string): Promise<boolean> {
-        return await firstValueFrom(this.api.post('invite-token/validate', token));
+    async validateToken(token: string): Promise<boolean>  {
+        return firstValueFrom(this.http.post<boolean>('invite-token/validate', token))
     }
 }
