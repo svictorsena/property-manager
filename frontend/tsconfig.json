@@ -17,7 +17,8 @@
     "paths": {
       "@/*": ["./src/app/*"],
       "@owner/*": ["./src/app/features/owner/*"],
-      "@auth/*": ["./src/app/features/auth/*"]
+      "@auth/*": ["./src/app/features/auth/*"],
+      "@tenant/*": ["./src/app/features/tenant/*"]
     }
   },
   "angularCompilerOptions": {

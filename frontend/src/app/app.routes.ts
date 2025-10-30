@@ -1,20 +1,18 @@
 import { Routes } from '@angular/router';
-import { Login } from './features/auth/pages/login/login';
-import { Register } from './features/auth/pages/register/register';
-import { NotFound } from './core/pages/not-found/not-found';
-import { TenantDashboard } from './features/tenant/pages//dashboard/tenant-dashboard';
-import { OwnerDashboard } from './features/owner/pages/dashboard/owner-dashboard';
-import { ownerGuard } from './core/guards/owner-guard';
-import { tenantGuard } from './core/guards/tenant-guard';
-import { NotAuthorized } from './core/pages/not-authorized/not-authorized';
-import { Properties } from './features/owner/pages/properties/properties';
-import { Contracts } from './features/owner/pages/contracts/contracts';
-import { Payments } from './features/owner/pages/payments/payments';
-import { Maintenance } from './features/owner/pages/maintenance/maintenance';
-import { Tenants } from './features/owner/pages/tenants/tenants';
-import { Reports } from './features/owner/pages/reports/reports';
-import { Settings } from './features/owner/pages/settings/settings';
-import { tokenGuard } from './core/guards/token-guard';
+import { tokenGuard, ownerGuard, tenantGuard } from './core/guards';
+import { TenantDashboard } from '@tenant/presentation/pages';
+import { NotAuthorized, NotFound } from '@/presentation/pages';
+import { Login, Register } from '@auth/presentation/pages';
+import {
+    Contracts,
+    Maintenance,
+    OwnerDashboard,
+    Payments,
+    Properties,
+    Settings,
+    Reports,
+    Tenants,
+} from '@owner/presentation/pages';
 
 export const routes: Routes = [
     {

@@ -11,11 +11,11 @@ export class AuthService {
         return this.http.post('auth/login', data);
     }
 
-    register(data: any, token: any) {
-        return this.http.post('auth/register', {...data, token})
+    registerByTenantInvite(data: any, token: any) {
+        return this.http.post('auth/register', {...data, token}).subscribe()
     }
 
-    registerTenantByInvite(data: any) {
-        return this.http.post('owner/register-tenant', data);
+    register(data: any) {
+        this.http.post('owner/register-tenant', data).subscribe();
     }
 }

@@ -1,7 +1,7 @@
 import { firstValueFrom, Observable } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IToken } from './IToken';
+import { IToken } from '../interfaces/IToken';
 import { ITenant } from '../interfaces/ITenant';
 
 
