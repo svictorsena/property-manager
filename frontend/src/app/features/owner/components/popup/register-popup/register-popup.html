@@ -1,0 +1,14 @@
+<app-popup-template>
+    <div class="flex flex-col flex-start w-full">
+        <h2 class="font-semibold text-2xl">Registro de Inquilino</h2>
+        <p class="text-sm text-gray-500">Registre um novo inquilio</p>
+    </div>
+    <app-register-form />
+    <button
+        type="button"
+        class="w-full mt-2 bg-red-600 hover:bg-red-500 text-white px-3 py-2 rounded-lg font-semibold transition-colors shadow-sm cursor-pointer"
+        (click)="onClose()"
+    >
+        Fechar
+    </button>
+</app-popup-template>

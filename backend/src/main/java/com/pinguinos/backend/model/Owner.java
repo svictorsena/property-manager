@@ -1,5 +1,6 @@
 package com.pinguinos.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,8 +20,9 @@ import java.util.Set;
 public class Owner extends User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+//    @JsonManagedReference
     private List<Tenant> tenants = new ArrayList<>();
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "owner")
     private Set<Contract> contracts = new HashSet<>();
 }

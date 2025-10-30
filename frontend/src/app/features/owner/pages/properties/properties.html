@@ -1,0 +1,47 @@
+<app-page-template>
+    <div class="flex justify-between flex-row w-full items-center">
+        <div class="relative inline-flex items-center">
+            <app-title-page title="Propriedades" subTitle="Gerencie suas propriedades" />
+            <span
+                class="absolute top-3 -right-6 px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-600 font-semibold"
+            >
+                20
+            </span>
+        </div>
+        <app-button-page text="Nova Propriedade" />
+    </div>
+
+    <div class="p-6 flex flex-col w-full gap-2 shadow-sm shadow-blue-200 rounded-2xl">
+        <div class="w-full flex flex-col gap-7">
+            <app-input-page placeholder="Buscar propriedade..." />
+            <div class="flex flex-col px-5 items-center w-full divide-y divide-gray-200 shadow-">
+                <div class="flex flex-row w-full pb-3 px-4 text-center text-gray-400 font-semibold">
+                    <span class="flex-1">Identificador</span>
+                    <span class="flex-1">Área</span>
+                    <span class="flex-1">Preço</span>
+                    <span class="flex-1">Status</span>
+                    <span class="flex-1">Ações</span>
+                </div>
+                <div class="flex flex-col w-full divide-y divide-gray-200 text-center">
+                    <!-- @for (user of users; track user.id) {
+                            <div
+                                class="flex flex-row p-4 hover:bg-gray-100 transition items-center"
+                            >
+                                <span class="flex-1 font-semibold text-black/70">{{
+                                    user.name
+                                }}</span>
+                                <span class="flex-1">{{ user.username }}</span>
+                                <span class="flex-1">{{ user.phone }}</span>
+                                <span class="flex-1">{{ user.unit }}</span>
+                                <button
+                                    class="flex-1 font-semibold text-sm h-10 bg-primary text-white rounded-lg cursor-pointer hover-primary"
+                                >
+                                    Detalhar
+                                </button> -->
+                    <!-- </div>
+                    } -->
+                </div>
+            </div>
+        </div>
+    </div>
+</app-page-template>

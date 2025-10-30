@@ -1,6 +1,7 @@
 package com.pinguinos.backend.service;
 
 import com.pinguinos.backend.dto.request.CreateTenantRequest;
+import com.pinguinos.backend.dto.response.TenantResponse;
 import com.pinguinos.backend.enums.Role;
 import com.pinguinos.backend.model.Owner;
 import com.pinguinos.backend.model.Tenant;
@@ -11,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +38,10 @@ public class TenantService {
         return userRepository.save(tenant);
     }
 
-    public List<Tenant> getAllTenantsByOwnerUsername(String ownerUsername) {
-        return tenantRepository.findAllByOwnerUsername(ownerUsername);
+    public Set<TenantResponse> getAllTenantsByOwnerUsername(String ownerUsername) {
+        return tenantRepository.findAllByOwnerUsername(ownerUsername)
+                .stream()
+                .map(tenant -> new TenantResponse(tenant.getFullName(), tenant.getUsername(), tenant.getTel(), tenant.getContracts()))
+                .collect(Collectors.toSet());
     }
 }

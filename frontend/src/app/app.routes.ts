@@ -1,80 +1,85 @@
 import { Routes } from '@angular/router';
-import { Login } from './pages/login/login';
-import { Home } from './pages/home/home';
-import { Register } from './pages/register/register';
-import { NotFound } from './pages/not-found/not-found';
-import { TenantDashboard } from './pages/tenant/dashboard/tenant-dashboard';
-import { OwnerDashboard } from './pages/owner/dashboard/owner-dashboard';
-import { ownerGuard } from './guards/owner-guard';
-import { tenantGuard } from './guards/tenant-guard';
-import { NotAuthorized } from './pages/not-authorized/not-authorized';
-import { Properties } from './pages/owner/properties/properties';
-import { Contracts } from './pages/owner/contracts/contracts';
-import { Payments } from './pages/owner/payments/payments';
-import { Maintenance } from './pages/owner/maintenance/maintenance';
-import { Tenants } from './pages/owner/tenants/tenants';
-import { Reports } from './pages/owner/reports/reports';
-import { Settings } from './pages/owner/settings/settings';
-import { tokenGuard } from './guards/token-guard';
+import { Login } from './features/auth/pages/login/login';
+import { Register } from './features/auth/pages/register/register';
+import { NotFound } from './core/pages/not-found/not-found';
+import { TenantDashboard } from './features/tenant/pages//dashboard/tenant-dashboard';
+import { OwnerDashboard } from './features/owner/pages/dashboard/owner-dashboard';
+import { ownerGuard } from './core/guards/owner-guard';
+import { tenantGuard } from './core/guards/tenant-guard';
+import { NotAuthorized } from './core/pages/not-authorized/not-authorized';
+import { Properties } from './features/owner/pages/properties/properties';
+import { Contracts } from './features/owner/pages/contracts/contracts';
+import { Payments } from './features/owner/pages/payments/payments';
+import { Maintenance } from './features/owner/pages/maintenance/maintenance';
+import { Tenants } from './features/owner/pages/tenants/tenants';
+import { Reports } from './features/owner/pages/reports/reports';
+import { Settings } from './features/owner/pages/settings/settings';
+import { tokenGuard } from './core/guards/token-guard';
 
 export const routes: Routes = [
     {
-        path: '',
-        component: Home,
+        path: 'auth',
+        children: [
+            {
+                path: 'login',
+                component: Login,
+            },
+            {
+                path: 'register',
+                component: Register,
+                canActivate: [tokenGuard],
+            },
+        ],
     },
     {
-        path: 'login',
-        component: Login,
-    },
-    {
-        path: 'tenant/dashboard',
+        path: 'tenant',
         canActivate: [tenantGuard],
-        component: TenantDashboard,
+
+        children: [
+            {
+                path: 'dashboard',
+                component: TenantDashboard,
+            },
+        ],
     },
     {
-        path: 'owner/dashboard',
+        path: 'owner',
         canActivate: [ownerGuard],
-        component: OwnerDashboard,
-    },
-    {
-        path: 'owner/properties',
-        canActivate: [ownerGuard],
-        component: Properties,
-    },
-    {
-        path: 'owner/contracts',
-        canActivate: [ownerGuard],
-        component: Contracts,
-    },
-    {
-        path: 'owner/payments',
-        canActivate: [ownerGuard],
-        component: Payments,
-    },
-    {
-        path: 'owner/maintenance',
-        canActivate: [ownerGuard],
-        component: Maintenance,
-    },
-    {
-        path: 'owner/tenants',
-        canActivate: [ownerGuard],
-        component: Tenants,
-    },
-    {
-        path: 'register',
-        canActivate: [tokenGuard],
-        component: Register,
-    },
-    {
-        path: 'owner/reports',
-        canActivate: [ownerGuard],
-        component: Reports,
-    },
-    {
-        path: 'owner/settings',
-        canActivate: [ownerGuard],
-        component: Settings,
+        children: [
+            {
+                path: 'dashboard',
+                component: OwnerDashboard,
+            },
+            {
+                path: 'properties',
+                component: Properties,
+            },
+            {
+                path: 'contracts',
+                component: Contracts,
+            },
+            {
+                path: 'payments',
+                component: Payments,
+            },
+            {
+                path: 'maintenance',
+                component: Maintenance,
+            },
+            {
+                path: 'tenants',
+                component: Tenants,
+            },
+
+            {
+                path: 'reports',
+                component: Reports,
+            },
+            {
+                path: 'settings',
+                component: Settings,
+            },
+        ],
     },
     {
         path: 'not-authorized',

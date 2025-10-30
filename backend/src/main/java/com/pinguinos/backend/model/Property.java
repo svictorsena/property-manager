@@ -1,9 +1,11 @@
 package com.pinguinos.backend.model;
 
 import com.pinguinos.backend.enums.PropertyStatus;
+import com.pinguinos.backend.enums.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -33,6 +35,13 @@ public class Property {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private PropertyStatus status;
+
+    @Column(nullable = false)
+    private BigDecimal price;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PropertyType type;
 
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private Set<Contract> contracts = new HashSet<>();

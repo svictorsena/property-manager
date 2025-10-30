@@ -15,7 +15,9 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@/*": ["./src/app/*"]
+      "@/*": ["./src/app/*"],
+      "@owner/*": ["./src/app/features/owner/*"],
+      "@auth/*": ["./src/app/features/auth/*"]
     }
   },
   "angularCompilerOptions": {
