@@ -1,18 +1,6 @@
 import { Routes } from '@angular/router';
 import { tokenGuard, ownerGuard, tenantGuard } from './core/guards';
-import { TenantDashboard } from '@tenant/presentation/pages';
 import { NotAuthorized, NotFound } from '@/presentation/pages';
-import { Login, Register } from '@auth/presentation/pages';
-import {
-    Contracts,
-    Maintenance,
-    OwnerDashboard,
-    Payments,
-    Properties,
-    Settings,
-    Reports,
-    Tenants,
-} from '@owner/presentation/pages';
 
 export const routes: Routes = [
     {
@@ -20,62 +8,91 @@ export const routes: Routes = [
         children: [
             {
                 path: 'login',
-                component: Login,
+                loadComponent: () =>
+                    import('@auth/presentation/pages/login/login').then((m) => m.Login),
             },
             {
                 path: 'register',
-                component: Register,
                 canActivate: [tokenGuard],
+                loadComponent: () =>
+                    import('@auth/presentation/pages/register/register').then((m) => m.Register),
             },
         ],
     },
     {
         path: 'tenant',
-        canActivate: [tenantGuard],
-
+        canActivateChild: [tenantGuard],
         children: [
             {
+                path: '',
+                redirectTo: 'dashboard',
+                pathMatch: 'full',
+            },
+            {
                 path: 'dashboard',
-                component: TenantDashboard,
+                loadComponent: () =>
+                    import('@tenant/presentation/pages/dashboard/tenant-dashboard').then(
+                        (m) => m.TenantDashboard
+                    ),
             },
         ],
     },
     {
         path: 'owner',
-        canActivate: [ownerGuard],
+        canActivateChild: [ownerGuard],
         children: [
             {
+                path: '',
+                redirectTo: 'dashboard',
+                pathMatch: 'full',
+            },
+            {
                 path: 'dashboard',
-                component: OwnerDashboard,
+                loadComponent: () =>
+                    import('@owner/presentation/pages/dashboard/owner-dashboard').then(
+                        (m) => m.OwnerDashboard
+                    ),
             },
             {
                 path: 'properties',
-                component: Properties,
+                loadComponent: () =>
+                    import('@owner/presentation/pages/properties/properties').then(
+                        (m) => m.Properties
+                    ),
             },
             {
                 path: 'contracts',
-                component: Contracts,
+                loadComponent: () =>
+                    import('@owner/presentation/pages/contracts/contracts').then(
+                        (m) => m.Contracts
+                    ),
             },
             {
                 path: 'payments',
-                component: Payments,
+                loadComponent: () =>
+                    import('@owner/presentation/pages/payments/payments').then((m) => m.Payments),
             },
             {
                 path: 'maintenance',
-                component: Maintenance,
+                loadComponent: () =>
+                    import('@owner/presentation/pages/maintenance/maintenance').then(
+                        (m) => m.Maintenance
+                    ),
             },
             {
                 path: 'tenants',
-                component: Tenants,
+                loadComponent: () =>
+                    import('@owner/presentation/pages/tenants/tenants').then((m) => m.Tenants),
             },
-
             {
                 path: 'reports',
-                component: Reports,
+                loadComponent: () =>
+                    import('@owner/presentation/pages/reports/reports').then((m) => m.Reports),
             },
             {
                 path: 'settings',
-                component: Settings,
+                loadComponent: () =>
+                    import('@owner/presentation/pages/settings/settings').then((m) => m.Settings),
             },
         ],
     },
@@ -83,5 +100,8 @@ export const routes: Routes = [
         path: 'not-authorized',
         component: NotAuthorized,
     },
-    { path: '**', component: NotFound },
+    {
+        path: '**',
+        component: NotFound,
+    },
 ];
