@@ -6,7 +6,7 @@
         [inviteLink]="inviteLink()"
     />
     } @if (registerPopUp()) {
-    <app-register-popup (close)="closeRegisterPopUp()" />
+    <app-register-popup (close)="closeRegisterPopUp()" (invalidateQuery)="invalidateTenants()" />
     }
 
     <div class="flex justify-between flex-row w-full items-center">
@@ -31,12 +31,13 @@
     </div>
     <div class="p-6 flex flex-col w-full gap-2 shadow-sm shadow-blue-200 rounded-2xl h-[65dvh]">
         <div class="w-full h-full flex flex-col gap-7">
-            @switch (true) { @case (query.isPending()) {
+            <app-input-page placeholder="Buscar inquilino..." (search)="searchTenant($event)" />
+            @switch (true) { @case (tenantsQuery.isPending()) {
             <div class="w-full h-full flex justify-center items-center p-5">
                 <lucide-angular [img]="Loader2" class="animate-spin w-15 h-15" />
             </div>
             } @case (tenants().length > 0) {
-            <app-input-page placeholder="Buscar inquilino..." />
+
             <div class="flex flex-col px-5 items-center w-full divide-y divide-gray-200 shadow-">
                 <div class="flex flex-row w-full pb-3 px-4 text-center text-gray-400 font-semibold">
                     <span class="flex-1">Nome</span>

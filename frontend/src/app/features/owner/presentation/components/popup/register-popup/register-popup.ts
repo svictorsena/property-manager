@@ -12,8 +12,10 @@ import { RegisterForm } from '@/shared/components';
 })
 export class RegisterPopup {
     close = output();
+    invalidateQuery = output();
 
     onClose() {
         this.close.emit();
+        this.invalidateQuery.emit()
     }
 }

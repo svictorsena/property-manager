@@ -1,26 +1,26 @@
 <div class="flex flex-row gap-1 w-full items-center justify-center">
-        <button
-            class="bg-primary text-white font-semibold py-2 px-3 rounded-md cursor-pointer"
-            (click)="previousPage()"
-            [disabled]="currentPage() <= 1"
-        >
-            Anterior
-        </button>
-        @for (page of rangePages(totalPages(), currentPage()); track page) {
-        <button
-            class="text-white font-semibold p-2 rounded-md w-10 cursor-pointer"
-            (click)="selectPage(page)"
-            [class.bg-blue-550]="currentPage() === page"
-            [class.bg-primary]="currentPage() !== page"
-        >
-            {{ page }}
-        </button>
-        }
-        <button
-            class="bg-primary text-white font-semibold py-2 px-3 rounded-md cursor-pointer"
-            (click)="nextPage()"
-            [disabled]="currentPage() >= totalPages()"
-        >
-            Próximo
-        </button>
-    </div>
+    <button
+        class="bg-primary text-white font-semibold py-2 px-3 rounded-md cursor-pointer"
+        (click)="previousPage()"
+        [disabled]="currentPage() <= 1"
+    >
+        Anterior
+    </button>
+    @for (page of rangePages(totalPages(), currentPage()); track page) {
+    <button
+        class="text-white font-semibold p-2 rounded-md w-10 cursor-pointer"
+        (click)="selectPage(page)"
+        [class.bg-blue-550]="currentPage() === page"
+        [class.bg-primary]="currentPage() !== page"
+    >
+        {{ page }}
+    </button>
+    }
+    <button
+        class="bg-primary text-white font-semibold py-2 px-3 rounded-md cursor-pointer"
+        (click)="nextPage()"
+        [disabled]="currentPage() >= totalPages()"
+    >
+        Próximo
+    </button>
+</div>

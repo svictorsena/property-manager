@@ -27,9 +27,15 @@ public class OwnerController {
 
     @PreAuthorize("hasRole('OWNER')")
     @GetMapping("/tenants")
-    public Page<TenantResponse> getAllTenants(Authentication authentication, @PageableDefault(size = 6) Pageable pageable) {
+    public Page<TenantResponse> getAllTenants(Authentication authentication, @RequestParam(required = false) String search,  @PageableDefault(size = 6) Pageable pageable) {
         String ownerUsername = authentication.getName();
-        return tenantService.getAllTenantsByOwnerUsername(ownerUsername, pageable);
+        return tenantService.getAllTenantsByOwnerUsername(ownerUsername, search, pageable);
+    }
+
+    @GetMapping("/tenants/total")
+    public ResponseEntity<Map<String, Long>> getTotalTenants(Authentication authentication) {
+        String ownerUsername = authentication.getName();
+        return ResponseEntity.ok(Map.of("totalTenants", tenantService.getTenantsCount(ownerUsername)));
     }
 
     @PreAuthorize("hasRole('OWNER')")
