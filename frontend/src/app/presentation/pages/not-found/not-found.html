@@ -1,1 +1,16 @@
-<p>not-found works!</p>
+<div class="flex flex-col justify-center items-center h-screen text-center bg">
+    <lucide-angular [img]="AlertTriangle" class="w-16 h-16 text-primary mb-4" />
+
+    <h1 class="text-3xl font-bold text-black/80 mb-2">Página não encontrada</h1>
+    <p class="text-black/60 max-w-md mb-6">
+        A página que você está tentando acessar não existe ou foi movida.
+    </p>
+
+    <a
+        routerLink="/"
+        class="flex flex-row items-center gap-2 bg-primary text-white cursor-pointer font-semibold py-2 px-4 rounded-lg hover-primary transition-all"
+    >
+        <lucide-angular [img]="Home" size="18" />
+        Voltar para Início
+    </a>
+</div>

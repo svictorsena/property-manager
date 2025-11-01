@@ -13,7 +13,6 @@ import {
     TitlePage,
 } from '@owner/presentation/components';
 
-
 @Component({
     selector: 'app-tenants',
     imports: [

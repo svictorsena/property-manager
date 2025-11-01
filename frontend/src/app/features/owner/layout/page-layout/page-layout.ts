@@ -3,7 +3,7 @@ import { SideBar } from "../side-bar/side-bar";
 import { Header } from "../header/header";
 
 @Component({
-  selector: 'app-page-template',
+  selector: 'app-page-layout',
   imports: [SideBar, Header],
   templateUrl: './page-layout.html',
 })

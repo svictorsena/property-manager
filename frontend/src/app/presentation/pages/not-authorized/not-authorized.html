@@ -1,4 +1,14 @@
-<div class="flex justify-center items-center h-screen flex-col">
-	<h1 class="text-6xl">Bro, tu não tá autorizado a acessar essa página não.</h1>
-	<a class="text-5xl font-semibold text-gray-600" routerLink="/auth/login">Login</a>
+<div class="flex flex-col justify-center items-center h-screen text-center bg-blue-50/60">
+    <lucide-angular [img]="Lock" class="w-16 h-16 text-primary mb-4 text-primary" />
+
+    <h1 class="text-3xl font-bold text-black/80 mb-2">Acesso negado</h1>
+    <p class="text-black/60 max-w-md mb-6">Você não tem permissão para acessar esta página.</p>
+
+    <a
+        routerLink="/auth/login"
+        class="flex flex-row items-center gap-2 bg-primary text-white font-semibold py-2 px-4 rounded-lg hover-primary transition-all"
+    >
+        <lucide-angular [img]="LogIn" size="18" />
+        Ir para Login
+    </a>
 </div>

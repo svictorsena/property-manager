@@ -1,4 +1,4 @@
-<app-page-template>
+<app-page-layout>
     @if (openInvitePopUp()) {
     <app-invite-popup
         (close)="closeInvitePopUp()"
@@ -33,7 +33,7 @@
         <div class="w-full h-full flex flex-col gap-7">
             @switch (true) { @case (data.isLoading()) {
             <div class="w-full h-full flex justify-center items-center p-5">
-                <lucide-angular [img]="Loader2" class="animate-spin w-10 h-10" />
+                <lucide-angular [img]="Loader2" class="animate-spin w-15 h-15" />
             </div>
             } @case (tenants().length > 0) {
             <app-input-page placeholder="Buscar inquilino..." />
@@ -78,4 +78,4 @@
         [totalPages]="totalPages()"
     />
     }
-</app-page-template>
+</app-page-layout>
