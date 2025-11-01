@@ -1,5 +1,4 @@
 import { Component, computed, inject, Signal, signal } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
 import { LucideAngularModule, Mail, Plus, Search, Loader2 } from 'lucide-angular';
 import { OwnerService } from '@owner/services/owner-service';
 import { IPage, ITenant } from '@owner/interfaces';
@@ -12,6 +11,7 @@ import {
     ButtonPage,
     TitlePage,
 } from '@owner/presentation/components';
+import { CreateQueryResult, injectQuery } from '@tanstack/angular-query-experimental';
 
 @Component({
     selector: 'app-tenants',
@@ -42,15 +42,16 @@ export class Tenants {
         this.currentPage.set(page);
     }
 
-    readonly data = rxResource<IPage, { currentPage: number }>({
-        params: () => ({ currentPage: this.currentPage() }),
-        stream: ({ params }) => this.ownerService.getTenants(params.currentPage),
-        defaultValue: { content: [], totalPages: 0, totalElements: 0 },
-    });
+    query: CreateQueryResult<IPage, Error> = injectQuery(() => ({
+        queryKey: ['inquilinos', this.currentPage()],
+        queryFn: () => this.ownerService.getTenants(this.currentPage()),
+        keepPreviousData: true,
+        staleTime: 5 * 60 * 1000,
+    }));
 
-    readonly tenants: Signal<ITenant[]> = computed(() => this.data.value()?.content ?? []);
-    readonly totalTenants: Signal<number> = computed(() => this.data.value().totalElements ?? 0);
-    readonly totalPages: Signal<number> = computed(() => this.data.value().totalPages ?? 0);
+    readonly tenants: Signal<ITenant[]> = computed(() => this.query.data()?.content ?? []);
+    readonly totalTenants: Signal<number> = computed(() => this.query.data()?.totalElements ?? 0);
+    readonly totalPages: Signal<number> = computed(() => this.query.data()?.totalPages ?? 0);
 
     openInvitePopUp = signal<boolean>(false);
     inviteLink = signal<string>('');
