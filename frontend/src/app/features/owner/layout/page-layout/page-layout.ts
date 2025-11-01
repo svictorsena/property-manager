@@ -5,8 +5,8 @@ import { Header } from "../header/header";
 @Component({
   selector: 'app-page-template',
   imports: [SideBar, Header],
-  templateUrl: './page-template.html',
+  templateUrl: './page-layout.html',
 })
-export class PageTemplate {
+export class PageLayout {
 
 }

@@ -1,9 +1,7 @@
 import { firstValueFrom, Observable } from 'rxjs';
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IToken } from '../interfaces/IToken';
-import { ITenant } from '../interfaces/ITenant';
-
+import { IToken, IPage } from '@owner/interfaces';
 
 @Injectable({
     providedIn: 'root',
@@ -11,11 +9,11 @@ import { ITenant } from '../interfaces/ITenant';
 export class OwnerService {
     private readonly http = inject(HttpClient);
 
-    getTenants(): Observable<ITenant[]> {
-        return this.http.get<ITenant[]>('owner/tenants')
+    getTenants(currentPage: number): Observable<IPage> {
+        return this.http.get<IPage>('owner/tenants', { params: { page: currentPage - 1 } });
     }
 
     async createInvite(): Promise<IToken> {
-        return await firstValueFrom(this.http.post<IToken>('invite-token', {}));
+        return await firstValueFrom(this.http.post<IToken>('invite-token', null));
     }
 }

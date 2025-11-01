@@ -1,7 +1,10 @@
-import { Component, effect, inject, signal } from '@angular/core';
-import { LucideAngularModule, Mail, Plus, Search } from 'lucide-angular';
+import { Component, computed, inject, Signal, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { LucideAngularModule, Mail, Plus, Search, Loader2 } from 'lucide-angular';
 import { OwnerService } from '@owner/services/owner-service';
-import { PageTemplate } from '@owner/presentation/layout';
+import { IPage, ITenant } from '@owner/interfaces';
+import { PageLayout } from '@owner/layout';
+import { Pagination } from '@/shared/components';
 import {
     RegisterPopup,
     InvitePopup,
@@ -9,63 +12,46 @@ import {
     ButtonPage,
     TitlePage,
 } from '@owner/presentation/components';
-import { ITenant } from '@owner/interfaces';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+
 
 @Component({
     selector: 'app-tenants',
     imports: [
         TitlePage,
         LucideAngularModule,
-        PageTemplate,
+        PageLayout,
         ButtonPage,
         InputPage,
         RegisterPopup,
         InvitePopup,
-        AsyncPipe,
+        Pagination,
     ],
     standalone: true,
     templateUrl: './tenants.html',
 })
 export class Tenants {
+    ownerService = inject(OwnerService);
+
     readonly Plus = Plus;
     readonly Search = Search;
     readonly Mail = Mail;
+    readonly Loader2 = Loader2;
 
-    ownerService = inject(OwnerService);
+    readonly currentPage = signal<number>(1);
 
-    tenants$: Observable<ITenant[]> = this.ownerService.getTenants();
+    changePage(page: number) {
+        this.currentPage.set(page);
+    }
 
-    // constructor() {
-    //     effect(() => {
-    //         this.tenants$ =
-    //     });
-    // }
+    readonly data = rxResource<IPage, { currentPage: number }>({
+        params: () => ({ currentPage: this.currentPage() }),
+        stream: ({ params }) => this.ownerService.getTenants(params.currentPage),
+        defaultValue: { content: [], totalPages: 0, totalElements: 0 },
+    });
 
-    users = [
-        {
-            id: 1,
-            name: 'João Silva',
-            username: 'joaosilva',
-            phone: '(11) 98888-8888',
-            unit: '101-A',
-        },
-        {
-            id: 2,
-            name: 'Emanuel Marques',
-            username: 'emanuelmarques',
-            phone: '(11) 96666-6666',
-            unit: '103-A',
-        },
-        {
-            id: 3,
-            name: 'Maria Santos',
-            username: 'mariasantos',
-            phone: '(11) 97777-7777',
-            unit: '102-A',
-        },
-    ];
+    readonly tenants: Signal<ITenant[]> = computed(() => this.data.value()?.content ?? []);
+    readonly totalTenants: Signal<number> = computed(() => this.data.value().totalElements ?? 0);
+    readonly totalPages: Signal<number> = computed(() => this.data.value().totalPages ?? 0);
 
     openInvitePopUp = signal<boolean>(false);
     inviteLink = signal<string>('');
@@ -92,9 +78,5 @@ export class Tenants {
 
     closeRegisterPopUp() {
         this.registerPopUp.set(false);
-    }
-
-    onClick() {
-        this.ownerService.getTenants();
     }
 }

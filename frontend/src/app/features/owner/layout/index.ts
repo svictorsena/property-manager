@@ -1,3 +1,3 @@
 export * from './header/header'
-export * from './page-template/page-template'
+export * from './page-layout/page-layout'
 export * from './side-bar/side-bar'

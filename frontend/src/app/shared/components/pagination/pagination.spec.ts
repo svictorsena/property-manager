@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InvitePopup } from './invite-popup';
+import { Pagination } from './pagination';
 
-describe('InvitePopup', () => {
-  let component: InvitePopup;
-  let fixture: ComponentFixture<InvitePopup>;
+describe('Pagination', () => {
+  let component: Pagination;
+  let fixture: ComponentFixture<Pagination>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InvitePopup]
+      imports: [Pagination]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InvitePopup);
+    fixture = TestBed.createComponent(Pagination);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

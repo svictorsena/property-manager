@@ -1,6 +1,6 @@
-import { RegisterForm } from '@/features/shared/components/register-form/register-form';
+import { RegisterForm } from '@/shared/components';
 import { Component } from '@angular/core';
-import { AuthLayout } from '@auth/presentation/layout/auth-layout/auth-layout';
+import { AuthLayout } from '@auth/layout';
 
 @Component({
     selector: 'app-register-tenant',

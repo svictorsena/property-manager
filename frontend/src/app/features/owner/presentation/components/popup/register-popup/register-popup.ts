@@ -1,6 +1,6 @@
 import { Component, output } from '@angular/core';
-import { PopupLayout } from '@/features/owner/presentation/components/popup/popup-layout/popup-layout';
-import { RegisterForm } from '@/features/shared/components/register-form/register-form';
+import { PopupLayout } from '@owner/presentation/components';
+import { RegisterForm } from '@/shared/components';
 
 @Component({
     selector: 'app-register-popup',

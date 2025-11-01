@@ -15,7 +15,7 @@
             <span
                 class="absolute top-3 -right-1 px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-600 font-semibold"
             >
-                {{ users.length }}
+                {{ totalTenants() }}
             </span>
         </div>
         <div class="flex flex-row gap-2">
@@ -29,8 +29,13 @@
             <app-button-page (action)="openRegisterPopUp()" text="Novo Inquilino" />
         </div>
     </div>
-    <div class="p-6 flex flex-col w-full gap-2 shadow-sm shadow-blue-200 rounded-2xl">
-        <div class="w-full flex flex-col gap-7">
+    <div class="p-6 flex flex-col w-full gap-2 shadow-sm shadow-blue-200 rounded-2xl h-[65dvh]">
+        <div class="w-full h-full flex flex-col gap-7">
+            @switch (true) { @case (data.isLoading()) {
+            <div class="w-full h-full flex justify-center items-center p-5">
+                <lucide-angular [img]="Loader2" class="animate-spin w-10 h-10" />
+            </div>
+            } @case (tenants().length > 0) {
             <app-input-page placeholder="Buscar inquilino..." />
             <div class="flex flex-col px-5 items-center w-full divide-y divide-gray-200 shadow-">
                 <div class="flex flex-row w-full pb-3 px-4 text-center text-gray-400 font-semibold">
@@ -40,8 +45,9 @@
                     <span class="flex-1">Propriedade</span>
                     <span class="flex-1">Ações</span>
                 </div>
+
                 <div class="flex flex-col w-full divide-y divide-gray-200 text-center">
-                    @for (tenant of tenants$ | async; track tenant.username) {
+                    @for (tenant of tenants(); track tenant.username) {
                     <div class="flex flex-row p-4 hover:bg-gray-100 transition items-center">
                         <span class="flex-1 font-semibold text-black/70">{{
                             tenant.fullName
@@ -58,6 +64,18 @@
                     }
                 </div>
             </div>
+            } @default {
+            <div class="w-full h-full flex justify-center items-center">
+                <span class="font-semibold">Sem inquilinos registrados</span>
+            </div>
+            } }
         </div>
     </div>
+    @if (totalPages() > 1 ) {
+    <app-pagination
+        (changePage)="changePage($event)"
+        [currentPage]="currentPage()"
+        [totalPages]="totalPages()"
+    />
+    }
 </app-page-template>

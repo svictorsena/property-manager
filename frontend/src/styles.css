@@ -46,4 +46,10 @@
     .bg-primary {
         background-color: hsl(200 85% 50%);
     }
+
+    .bg-blue-550 {
+        background-color: hsl(200 85% 60%);
+    }
+
+    
 }

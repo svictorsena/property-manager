@@ -12,8 +12,8 @@ import { PopupLayout } from '@owner/presentation/components';
 export class InvitePopup {
     inviteLink = input.required<string>();
 
-    close = output();
-    copyLink = output();
+    close = output<void>();
+    copyLink = output<void>();
 
     onClose() {
         this.close.emit();

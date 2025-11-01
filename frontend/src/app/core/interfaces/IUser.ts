@@ -1,4 +1,4 @@
-import { Role } from "@auth/types/role";
+import { Role } from "@/core/types/role";
 
 export interface IUser {
     fullName: string;

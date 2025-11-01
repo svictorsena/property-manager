@@ -8,6 +8,8 @@ import com.pinguinos.backend.model.Tenant;
 import com.pinguinos.backend.repository.TenantRepository;
 import com.pinguinos.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,10 +40,8 @@ public class TenantService {
         return userRepository.save(tenant);
     }
 
-    public Set<TenantResponse> getAllTenantsByOwnerUsername(String ownerUsername) {
-        return tenantRepository.findAllByOwnerUsername(ownerUsername)
-                .stream()
-                .map(tenant -> new TenantResponse(tenant.getFullName(), tenant.getUsername(), tenant.getTel(), tenant.getContracts()))
-                .collect(Collectors.toSet());
+    public Page<TenantResponse> getAllTenantsByOwnerUsername(String ownerUsername, Pageable pageable) {
+        return tenantRepository.findAllByOwnerUsername(ownerUsername, pageable)
+                .map(tenant -> new TenantResponse(tenant.getFullName(), tenant.getUsername(), tenant.getTel(), tenant.getContracts()));
     }
 }
