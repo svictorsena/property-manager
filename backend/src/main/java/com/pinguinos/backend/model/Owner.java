@@ -20,9 +20,13 @@ import java.util.Set;
 public class Owner extends User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
-//    @JsonManagedReference
     private List<Tenant> tenants = new ArrayList<>();
 
-    @OneToMany(mappedBy = "owner")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private Set<Contract> contracts = new HashSet<>();
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
+    private Set<Property> properties = new HashSet<>();
 }

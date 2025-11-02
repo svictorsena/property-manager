@@ -1,5 +1,6 @@
 package com.pinguinos.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pinguinos.backend.enums.MaintenanceStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,6 +19,7 @@ public class Maintenance {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;

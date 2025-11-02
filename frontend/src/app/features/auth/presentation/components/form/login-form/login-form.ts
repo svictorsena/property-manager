@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ErrorMessage } from '@auth/presentation/components';
-import { InputForm } from '@auth/presentation/components';
-import { ButtonForm } from '@auth/presentation/components';
+import { ErrorMessage, InputForm, ButtonForm } from '@/shared/components';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth-service';
 

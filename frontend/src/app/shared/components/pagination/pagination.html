@@ -8,10 +8,12 @@
     </button>
     @for (page of rangePages(totalPages(), currentPage()); track page) {
     <button
-        class="text-white font-semibold p-2 rounded-md w-10 cursor-pointer"
+        class="text-white font-semibold p-2 rounded-md w-10"
         (click)="selectPage(page)"
         [class.bg-blue-550]="currentPage() === page"
         [class.bg-primary]="currentPage() !== page"
+        [class.cursor-pointer]="typeof page === 'number'"
+        [disabled]="typeof page !== 'number'"
     >
         {{ page }}
     </button>

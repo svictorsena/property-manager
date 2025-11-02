@@ -7,15 +7,15 @@ import { FormControl } from '@angular/forms';
     templateUrl: './error-message.html',
 })
 export class ErrorMessage {
-    message = input<string>();
-    control = input<FormControl>();
+    message = input.required<string>();
+    control = input.required<FormControl>();
 
     getErrorMessage(): string | null {
         if (!this.control() || !this.control()!.touched || !this.control()!.errors) return null;
 
         const errors = this.control()!.errors!;
 
-        if (errors['required']) return 'Campo obrigatório';
+        if (errors['required']) return this.message();
         if (errors['minlength']) {
             const requiredLength = errors['minlength'].requiredLength;
             return `Mínimo de ${requiredLength} caracteres`;

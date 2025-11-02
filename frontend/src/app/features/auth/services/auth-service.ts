@@ -16,6 +16,6 @@ export class AuthService {
     }
 
     register(data: any) {
-        this.http.post('owner/register-tenant', data).subscribe();
+        this.http.post('owner/register-tenant', data)
     }
 }

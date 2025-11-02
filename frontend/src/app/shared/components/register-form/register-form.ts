@@ -1,9 +1,9 @@
 import { AuthService } from '@auth/services/auth-service';
 import { Component, inject } from '@angular/core';
-import { InputForm } from '@auth/presentation/components';
-import { ErrorMessage } from '@auth/presentation/components';
+import { InputForm } from '@/shared/components';
+import { ErrorMessage } from '@/shared/components';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonForm } from '@auth/presentation/components';
+import { ButtonForm } from '@/shared/components';
 import { mustBeNumberValidator } from '@auth/utils/mustBeNumberValidator';
 import { ActivatedRoute } from '@angular/router';
 

@@ -2,22 +2,18 @@ package com.pinguinos.backend.controller;
 
 import com.pinguinos.backend.dto.request.CreateTenantRequest;
 import com.pinguinos.backend.dto.response.TenantResponse;
-import com.pinguinos.backend.model.Tenant;
 import com.pinguinos.backend.service.TenantService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/owner")

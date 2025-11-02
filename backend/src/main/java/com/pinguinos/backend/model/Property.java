@@ -1,7 +1,6 @@
 package com.pinguinos.backend.model;
 
 import com.pinguinos.backend.enums.PropertyStatus;
-import com.pinguinos.backend.enums.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +19,7 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String identifier;
 
     @Column(nullable = false)
@@ -39,13 +38,20 @@ public class Property {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private PropertyType type;
-
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private Set<Contract> contracts = new HashSet<>();
 
     @OneToMany(mappedBy = "property", fetch = FetchType.LAZY)
     private Set<Maintenance> maintenances = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private Owner owner;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.status == null) {
+            this.status = PropertyStatus.AVAILABLE;
+        }
+    }
 }

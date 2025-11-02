@@ -1,2 +1,5 @@
 export * from './pagination/pagination'
 export * from './register-form/register-form'
+export * from './input-form/input-form'
+export * from './button-form/button-form'
+export * from './error-message/error-message'

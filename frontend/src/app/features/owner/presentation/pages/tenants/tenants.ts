@@ -48,8 +48,8 @@ export class Tenants {
         this.search.set(value);
     }
 
-    tenantsQuery: CreateQueryResult<IPage, Error> = injectQuery(() => ({
-        queryKey: ['inquilinos', this.currentPage(), this.search()],
+    tenantsQuery: CreateQueryResult<IPage<ITenant>, Error> = injectQuery(() => ({
+        queryKey: ['tenants', this.currentPage(), this.search()],
         queryFn: () => this.ownerService.getTenants(this.currentPage(), this.search()),
         keepPreviousData: true,
         staleTime: 5 * 60 * 1000,
