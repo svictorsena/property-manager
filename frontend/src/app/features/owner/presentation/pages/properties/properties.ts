@@ -6,18 +6,20 @@ import { ButtonPage, InputPage, TitlePage, PropertiesPopup } from '@owner/presen
 import { CreateQueryResult, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
 import { IPage, ITotalProperties, IProperties } from '@owner/interfaces';
 import { Pagination } from '@/shared/components';
+import { PropertyStatusTranslatePipe } from "@owner/pipes/property-status-translate-pipe";
 
 @Component({
     selector: 'app-properties',
     imports: [
-        LucideAngularModule,
-        TitlePage,
-        PageLayout,
-        ButtonPage,
-        InputPage,
-        PropertiesPopup,
-        Pagination,
-    ],
+    LucideAngularModule,
+    TitlePage,
+    PageLayout,
+    ButtonPage,
+    InputPage,
+    PropertiesPopup,
+    Pagination,
+    PropertyStatusTranslatePipe
+],
     templateUrl: './properties.html',
 })
 export class Properties {
